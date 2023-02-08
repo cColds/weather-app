@@ -31,10 +31,11 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	position: relative;
 }
 
 .time {
-	color: #6d77a5;
+	color: #7f93eb;
 }
 
 .cloud {
@@ -45,16 +46,38 @@ main {
 	font-size: 5rem;
 	text-shadow: #6d77a5 1px 0 10px;
 	font-weight: bold;
+	display: flex;
+}
+
+.temperature::after {
+	content: "°";
+	font-size: 2.5rem;
+	padding-top: 10px;
+	padding-left: 0.5rem;
+}
+
+.feels-like {
+	position: absolute;
+	bottom: 0;
 }
 
 .more-weather-info {
-	background-color: #22263b;
-	padding: 0.5em;
-	border-radius: 5px;
-	display: flex;
 	gap: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
 
-	outline: 1px solid #6d77a5;
+.more-weather-info div {
+	font-weight: bold;
+	width: 200px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #7f93eb;
+	border-radius: 5px;
+	padding: 1em;
 }
 
 .five-day-forecast {
@@ -65,19 +88,18 @@ main {
 
 .day-forecast-card {
 	flex-grow: 1;
-	background-color: #6d77a5;
 	padding: 1em;
 	border-radius: 5px;
-	width: 150px;
+	width: 125px;
 	/* From https://css.glass */
-	background: rgba(70, 52, 91, 0.5);
-	border-radius: 16px;
+	background-color: #7f93eb;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(10.8px);
 	-webkit-backdrop-filter: blur(10.8px);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	font-weight: bold;
 }
 
 .five-day-forecast .cloud {
