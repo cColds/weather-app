@@ -23,8 +23,50 @@ main {
 	gap: 15px;
 }
 
+.search-bar-container {
+	position: relative;
+	width: 50%;
+	min-width: 150px;
+}
+
 .search-bar {
-	width: 75%;
+	width: 100%;
+	border-radius: 5px;
+	border: 0;
+	padding: 1em;
+	transition: 0.3s;
+	padding-left: 2.25rem;
+}
+
+i {
+	cursor: pointer;
+}
+
+.fa-magnifying-glass {
+	position: absolute;
+	left: 20px;
+	color: grey;
+	top: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.fa-xmark {
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	color: grey;
+	right: 5px;
+	background-color: white;
+	transition: 0.3s;
+}
+
+.fa-xmark:hover {
+	color: red;
+}
+
+.search-bar:focus {
+	outline: 1px solid rgba(62, 138, 224, 0.3);
+	box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
 }
 
 .weather-info {
