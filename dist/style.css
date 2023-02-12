@@ -80,10 +80,6 @@ i {
 	color: #7f93eb;
 }
 
-.cloud {
-	width: 200px;
-}
-
 .weather-description {
 	text-transform: capitalize;
 }
@@ -150,4 +146,8 @@ i {
 
 .five-day-forecast .cloud {
 	width: 50px;
+}
+
+img {
+	border: 1px solid brown;
 }

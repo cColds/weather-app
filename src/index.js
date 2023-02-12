@@ -44,6 +44,8 @@ async function updateWeatherInfo() {
 		hpa.textContent = response.main.pressure;
 		sunrise.textContent = response.sys.sunrise;
 		sunset.textContent = response.sys.sunset;
+		location.textContent = `${response.name}, ${response.sys.country}`;
+		console.log(location.textContent);
 		console.log(response);
 	} catch {
 		console.log("no lol");
@@ -62,3 +64,7 @@ searchBar.addEventListener("keyup", (e) => {
 		searchWeatherInfo();
 	}
 });
+
+// default weather to singapore
+searchBar.value = "Singapore";
+searchWeatherInfo();
