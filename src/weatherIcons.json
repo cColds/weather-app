@@ -1,0 +1,27 @@
+{
+	"clear": {
+		"day": "https://worldweather.wmo.int/images/24a.png",
+		"night": "https://worldweather.wmo.int/images/24b.png"
+	},
+	"cloud": {
+		"fewClouds": {
+			"day": "https://worldweather.wmo.int/images/22a.png",
+			"night": "https://worldweather.wmo.int/images/22b.png"
+		},
+		"scatteredClouds": {
+			"day": "https://worldweather.wmo.int/images/21a.png",
+			"night": "https://worldweather.wmo.int/images/21b.png"
+		},
+		"brokenClouds": {
+			"day": "https://worldweather.wmo.int/images/23a.png",
+			"night": "https://worldweather.wmo.int/images/23b.png"
+		},
+		"overcast": "https://worldweather.wmo.int/images/20.png"
+	},
+	"thunder": "https://worldweather.wmo.int/images/2.png",
+
+	"rain": "https://worldweather.wmo.int/images/14.png",
+	"snow": "https://worldweather.wmo.int/images/7.png",
+	"mist": "https://worldweather.wmo.int/images/17.png",
+	"drizzle": "https://worldweather.wmo.int/images/14.png"
+}

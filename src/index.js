@@ -1,3 +1,6 @@
+import weatherIcons from "./weatherIcons.json";
+
+console.log(weatherIcons);
 const searchBar = document.querySelector(".search-bar");
 
 // main weather
@@ -5,7 +8,7 @@ const search = document.querySelector(".fa-magnifying-glass");
 const clearSearch = document.querySelector(".fa-xmark");
 const location = document.querySelector(".location");
 const time = document.querySelector(".time");
-const cloud = document.querySelector(".cloud");
+const weatherIcon = document.querySelector(".cloud");
 const weatherDescription = document.querySelector(".weather-description");
 const temperature = document.querySelector(".temperature");
 const feelsLike = document.querySelector(".feels-like");
@@ -22,6 +25,23 @@ const sunrise = document.querySelector(".sunrise-value");
 const sunset = document.querySelector(".sunset-value");
 const apiKey = "d92ae7934e5fdcdcd8e453a8b3bbadd7";
 
+function checkWeatherType(weather) {
+	console.log(weather, weatherIcons.snow);
+	if (weather === "Clear") {
+		weatherIcon.src = weatherIcons.clear.day;
+	} else if (weather === "Clouds") {
+		weatherIcon.src = weatherIcons.cloud.brokenClouds.day;
+	} else if (weather === "Rain" || weather === "Drizzle") {
+		weatherIcon.src = weatherIcons.rain;
+	} else if (weather === "Snow") {
+		weatherIcon.src = weatherIcons.snow;
+	} else if (weather === "Thunderstorm") {
+		weatherIcon.src = weatherIcons.thunder;
+	} else {
+		weatherIcon.src = weatherIcons.mist;
+	}
+}
+
 // weather forecast
 async function updateWeatherInfo() {
 	try {
@@ -33,7 +53,7 @@ async function updateWeatherInfo() {
 		);
 
 		const response = await data.json();
-
+		checkWeatherType(response.weather[0].main);
 		weatherDescription.textContent = response.weather[0].description;
 		temperature.textContent = response.main.temp.toFixed(0);
 		feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
