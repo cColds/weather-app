@@ -1,4 +1,4 @@
-import weatherIcons from "./weatherIcons.json";
+import weather from "./weatherIcons.json";
 
 const searchBar = document.querySelector(".search-bar");
 
@@ -7,7 +7,7 @@ const search = document.querySelector(".fa-magnifying-glass");
 const clearSearch = document.querySelector(".fa-xmark");
 const location = document.querySelector(".location");
 const time = document.querySelector(".time");
-const weatherIcon = document.querySelector(".cloud");
+const mainWeatherIcon = document.querySelector(".weather-icon");
 const weatherDescription = document.querySelector(".weather-description");
 const temperature = document.querySelector(".temperature");
 const feelsLike = document.querySelector(".feels-like");
@@ -34,20 +34,21 @@ const weatherForecastDescription = document.querySelectorAll(
 const weatherForecastTemperature = document.querySelectorAll(
 	".day-forecast-temperature"
 );
+const weatherForecastIcon = document.querySelectorAll(".weather-forecast-icon");
 
-function checkWeatherType(weather) {
-	if (weather === "Clear") {
-		weatherIcon.src = weatherIcons.clear.day;
-	} else if (weather === "Clouds") {
-		weatherIcon.src = weatherIcons.cloud.brokenClouds.day;
-	} else if (weather === "Rain" || weather === "Drizzle") {
-		weatherIcon.src = weatherIcons.rain;
-	} else if (weather === "Snow") {
-		weatherIcon.src = weatherIcons.snow;
-	} else if (weather === "Thunderstorm") {
-		weatherIcon.src = weatherIcons.thunder;
+function updateWeatherIcon(weatherIcon, weatherValue) {
+	if (weatherValue === "Clear") {
+		weatherIcon.src = weather.clear.day;
+	} else if (weatherValue === "Clouds") {
+		weatherIcon.src = weather.cloud.brokenClouds.day;
+	} else if (weatherValue === "Rain" || weather === "Drizzle") {
+		weatherIcon.src = weather.rain;
+	} else if (weatherValue === "Snow") {
+		weatherIcon.src = weather.snow;
+	} else if (weatherValue === "Thunderstorm") {
+		weatherIcon.src = weather.thunder;
 	} else {
-		weatherIcon.src = weatherIcons.mist;
+		weatherIcon.src = weather.mist;
 	}
 }
 
@@ -61,8 +62,8 @@ async function updateWeatherInfo() {
 		);
 
 		const response = await data.json();
-
-		checkWeatherType(response.weather[0].main);
+		console.log(response);
+		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
 		weatherDescription.textContent = response.weather[0].description;
 		temperature.textContent = response.main.temp.toFixed(0);
 		feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
@@ -104,6 +105,13 @@ async function updateWeatherForecast() {
 			weatherForecastTemperature[i].textContent = `${response.list[
 				dailyForecast[i]
 			].main.temp.toFixed(0)}°`;
+		}
+
+		for (let i = 0; i < weatherForecastIcon.length; i += 1) {
+			weatherForecastIcon[i].textContent = updateWeatherIcon(
+				weatherForecastIcon[i],
+				response.list[dailyForecast[i]].weather[0].main
+			);
 		}
 
 		console.log(response);
