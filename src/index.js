@@ -13,8 +13,6 @@ const temperature = document.querySelector(".temperature");
 const feelsLike = document.querySelector(".feels-like");
 
 // more weather info
-// const airQualityIndex = document.querySelector(".air-quality-index-value");
-// const precipitation = document.querySelector(".precipitation-value");
 
 const humidity = document.querySelector(".humidity-value");
 const wind = document.querySelector(".wind-speed-value");
@@ -132,6 +130,10 @@ searchBar.addEventListener("keyup", (e) => {
 	if (e.key === "Enter") {
 		searchWeatherInfo();
 	}
+});
+
+clearSearch.addEventListener("click", () => {
+	searchBar.value = "";
 });
 
 // default weather to singapore
