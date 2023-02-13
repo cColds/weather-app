@@ -144,8 +144,8 @@ i {
 	font-weight: bold;
 }
 
-.five-day-forecast .cloud {
-	width: 50px;
+.day-forecast-weather-description {
+	text-transform: capitalize;
 }
 
 img {
