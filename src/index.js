@@ -11,6 +11,7 @@ const mainWeatherIcon = document.querySelector(".weather-icon");
 const weatherDescription = document.querySelector(".weather-description");
 const temperature = document.querySelector(".temperature");
 const feelsLike = document.querySelector(".feels-like");
+const weatherCard = document.querySelector(".weather-info");
 
 // more weather info
 
@@ -60,10 +61,12 @@ async function updateWeatherInfo() {
 		);
 
 		const response = await data.json();
+
 		console.log(response);
+
 		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
 		weatherDescription.textContent = response.weather[0].description;
-		temperature.textContent = response.main.temp.toFixed(0);
+		temperature.textContent = `${response.main.temp.toFixed(0)}°`;
 		feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
 			0
 		)}°`;
@@ -73,6 +76,7 @@ async function updateWeatherInfo() {
 		sunrise.textContent = response.sys.sunrise;
 		sunset.textContent = response.sys.sunset;
 		location.textContent = `${response.name}, ${response.sys.country}`;
+		weatherCard.className = `weather-info test`;
 	} catch {
 		console.error("Failed to resolve weather info");
 	}
