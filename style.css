@@ -8,10 +8,6 @@
 	box-sizing: border-box;
 }
 
-i {
-	cursor: pointer;
-}
-
 body {
 	background: linear-gradient(
 		90deg,
@@ -31,6 +27,14 @@ main {
 	flex-direction: column;
 	padding: 15px;
 	gap: 15px;
+}
+
+i {
+	cursor: pointer;
+}
+
+svg {
+	width: 24px;
 }
 
 /* SEARCH BAR */
@@ -112,31 +116,60 @@ main {
 }
 
 .feels-like {
-	position: absolute;
-	bottom: 30px;
-	font-size: 1.1rem;
+	/* position: absolute;
+	bottom: 30px; */
+	font-size: 1.5rem;
+	padding-bottom: 1rem;
 }
 
 /* MORE WEATHER INFO  */
 
 .more-weather-info {
+	border-top: 2px solid powderblue;
 	gap: 15px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
+	padding-top: 1rem;
 }
 
-.more-weather-info div {
-	/* font-weight: bold;
-	width: 200px;
-	flex-grow: 1;
+.more-weather-info-item {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	background-color: #7f93eb;
-	border-radius: 5px;
-	padding: 1em;
-	gap: 15px; */
+	font-weight: bold;
+	color: #d2e0f1;
+}
+
+.more-weather-info-item .value {
+	font-size: 1.2rem;
+	text-shadow: 0px 0px 3px rgba(58, 57, 52, 1);
+	font-weight: bold;
+	color: white;
+}
+
+.wind-icon {
+	fill: #bae6fd;
+}
+
+.humidity-icon {
+	fill: #60a5fa;
+}
+.hpa-icon {
+	fill: rgb(199, 214, 241);
+}
+
+.sunrise-icon {
+	fill: #fb923c;
+}
+
+.sunset-icon {
+	fill: #f87e4d;
+}
+
+.sun-info {
+	display: flex;
+	gap: 15px;
 }
 
 /* WEATHER FORECAST  */
