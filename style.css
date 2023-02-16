@@ -83,11 +83,8 @@ main {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	position: relative;
 	padding: 2em;
-	border-radius: 5px;
 	width: clamp(250px, 100%, 500px);
-	box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
 	/* From https://css.glass */
 	background: rgba(255, 255, 255, 0.2);
@@ -110,14 +107,14 @@ main {
 
 .temperature {
 	font-size: 5rem;
-	text-shadow: #8ae2bf 1px 0 3px;
 	font-weight: bold;
 	display: flex;
 }
 
 .feels-like {
 	position: absolute;
-	bottom: 0;
+	bottom: 30px;
+	font-size: 1.1rem;
 }
 
 /* MORE WEATHER INFO  */
