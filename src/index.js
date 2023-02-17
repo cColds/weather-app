@@ -64,6 +64,15 @@ async function updateWeatherInfo() {
 
 		console.log(response);
 
+		const localTime = new Date();
+		const localTimeInMilliseconds = localTime.getTime();
+		const localTimeOffsetInMilliseconds =
+			localTime.getTimezoneOffset() * 60000;
+		const utc = localTimeInMilliseconds + localTimeOffsetInMilliseconds;
+		const locationTime = utc + 1000 * response.timezone;
+
+		time.textContent = new Date(locationTime);
+
 		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
 		weatherDescription.textContent = response.weather[0].description;
 		temperature.textContent = `${response.main.temp.toFixed(0)}°`;
