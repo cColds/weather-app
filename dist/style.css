@@ -139,6 +139,9 @@ svg {
 	align-items: center;
 	font-weight: bold;
 	color: #d2e0f1;
+	width: 100px;
+	flex-wrap: wrap;
+	flex-grow: 1;
 }
 
 .more-weather-info-item .value {
@@ -171,6 +174,8 @@ svg {
 	display: flex;
 	flex-direction: row;
 	gap: 15px;
+	width: 250px;
+	justify-content: center;
 }
 
 .sun-info .sunset,
