@@ -169,7 +169,15 @@ svg {
 
 .sun-info {
 	display: flex;
+	flex-direction: row;
 	gap: 15px;
+}
+
+.sun-info .sunset,
+.sun-info .sunrise {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 /* WEATHER FORECAST  */
