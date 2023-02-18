@@ -10,7 +10,8 @@ const searchButton = document.querySelector(".fa-magnifying-glass");
 const clearSearch = document.querySelector(".fa-xmark");
 
 // Weather
-
+const weatherInfo = document.querySelector(".weather-info");
+const loadingAnimation = document.querySelector(".loading-animation");
 const location = document.querySelector(".location");
 const time = document.querySelector(".time");
 const mainWeatherIcon = document.querySelector(".weather-icon");
@@ -68,7 +69,7 @@ async function updateWeatherInfo() {
 			"imperial",
 			"weather"
 		);
-
+		loadingAnimation.classList.remove("loading");
 		console.log(response);
 
 		time.textContent = format(
@@ -149,6 +150,8 @@ async function updateWeatherForecast() {
 }
 
 function searchWeatherInfo() {
+	loadingAnimation.classList.add("loading");
+
 	updateWeatherInfo();
 	updateWeatherForecast();
 	searchBar.value = "";
