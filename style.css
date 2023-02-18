@@ -42,6 +42,7 @@ svg {
 .search-bar-container {
 	position: relative;
 	width: clamp(250px, 75%, 750px);
+	color: rgb(91, 187, 176);
 }
 
 .search-bar {
@@ -52,33 +53,35 @@ svg {
 	transition: 0.3s;
 	padding-left: 2.25rem;
 	height: 40px;
+	background-color: #b7dfcc;
+	color: rgb(91, 187, 176);
 }
 
 .fa-magnifying-glass {
 	position: absolute;
 	left: 20px;
-	color: grey;
 	top: 20px;
 	transform: translate(-50%, -50%);
+	font-weight: bold;
 }
 
 .fa-xmark {
 	position: absolute;
 	top: 20px;
 	transform: translate(-50%, -50%);
-	color: grey;
 	right: 5px;
-	background-color: white;
 	transition: 0.3s;
-}
-
-.fa-xmark:hover {
-	color: red;
+	font-weight: bold;
 }
 
 .search-bar:focus {
-	outline: 1px solid rgba(62, 138, 224, 0.3);
-	box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+	outline: 1px solid rgba(72, 175, 98, 0.3);
+	box-shadow: rgb(91, 187, 176) 0px 0px 3px 3px;
+}
+
+.search-bar::placeholder {
+	font-weight: bold;
+	color: rgb(91, 187, 176);
 }
 
 .search-error-text {
@@ -183,13 +186,6 @@ svg {
 .sunset-icon {
 	fill: #f87e4d;
 }
-
-/* .sunset,
-.sunrise {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-} */
 
 /* WEATHER FORECAST  */
 
