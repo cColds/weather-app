@@ -83,20 +83,30 @@ svg {
 
 /* MAIN WEATHER  */
 
-.weather-info {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 2em;
-	width: clamp(250px, 100%, 500px);
-
-	/* From https://css.glass */
+.weather-card {
 	background: rgba(255, 255, 255, 0.2);
 	border-radius: 16px;
 	box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	border: 1px solid rgba(255, 255, 255, 0.3);
+	display: flex;
+	justify-content: center;
+	padding: 2em;
+	width: clamp(250px, 100%, 500px);
+	border: 1px solid salmon;
+	position: relative;
+}
+
+.weather-info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	border: 1px solid slateblue;
+}
+
+.loading-animation.loading + .weather-info {
+	visibility: hidden;
 }
 
 .time {
