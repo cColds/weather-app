@@ -8,6 +8,7 @@ import getWeatherInfo from "./weatherData";
 const searchBar = document.querySelector(".search-bar");
 const searchButton = document.querySelector(".fa-magnifying-glass");
 const clearSearch = document.querySelector(".fa-xmark");
+const searchErrorText = document.querySelector(".search-error-text");
 
 // Weather
 const loadingAnimation = document.querySelector(".loading-animation");
@@ -70,11 +71,13 @@ async function updateWeatherInfo() {
 			"weather"
 		);
 		loadingAnimation.classList.remove("loading");
+		searchErrorText.style.visibility = "hidden";
+
 		console.log(response);
 
 		time.textContent = format(
 			new Date(convertTimeToCitySearched(response, new Date())),
-			"MMMM do, EEEE, y, h:mm a"
+			"MMMM do, EEEE, h:mm a"
 		);
 
 		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
@@ -104,7 +107,8 @@ async function updateWeatherInfo() {
 			"h:mm a"
 		);
 		location.textContent = `${response.name}, ${response.sys.country}`;
-	} catch {
+	} catch (response) {
+		searchErrorText.style.visibility = "visible";
 		console.error("Failed to resolve weather info");
 	}
 }
