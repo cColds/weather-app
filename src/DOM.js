@@ -55,7 +55,6 @@ function updateWeatherIcon(weatherIcon, weatherValue) {
 }
 
 function convertTimeToCitySearched(response, date) {
-	// const localTime = new Date();
 	const localTimeInMilliseconds = date.getTime();
 	const localTimeOffsetInMilliseconds = date.getTimezoneOffset() * 60000;
 	const utc = localTimeInMilliseconds + localTimeOffsetInMilliseconds;
