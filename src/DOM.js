@@ -29,7 +29,7 @@ const sunrise = document.querySelector(".sunrise-value");
 const sunset = document.querySelector(".sunset-value");
 
 // Weather Forecast
-
+const weatherForecast = document.querySelector(".weather-forecast");
 const weatherForecastDay = document.querySelectorAll(".day-forecast-date");
 const weatherForecastDescription = document.querySelectorAll(
 	".day-forecast-weather-description"
@@ -154,6 +154,7 @@ async function updateWeatherForecast() {
 		console.log(response);
 		populateWeatherForecastInfo(response);
 		loadingAnimation.classList.remove("loading");
+		weatherForecast.style.visibility = "visible";
 	} catch {
 		console.error("Failed to resolve weather forecast");
 	}
