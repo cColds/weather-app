@@ -91,7 +91,7 @@ async function updateWeatherInfo() {
 		hpa.textContent = response.main.pressure;
 		visibility.textContent = `${(response.visibility / 1609).toFixed(
 			2
-		)} mph`;
+		)} miles`;
 		sunrise.textContent = format(
 			convertTimeToCitySearched(
 				response,
