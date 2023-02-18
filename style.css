@@ -100,7 +100,7 @@ svg {
 	display: flex;
 	justify-content: center;
 	padding: 2em;
-	width: clamp(250px, 100%, 500px);
+	width: clamp(250px, 100%, 750px);
 	position: relative;
 }
 
