@@ -10,7 +10,6 @@ const searchButton = document.querySelector(".fa-magnifying-glass");
 const clearSearch = document.querySelector(".fa-xmark");
 
 // Weather
-const weatherInfo = document.querySelector(".weather-info");
 const loadingAnimation = document.querySelector(".loading-animation");
 const location = document.querySelector(".location");
 const time = document.querySelector(".time");
@@ -24,6 +23,7 @@ const feelsLike = document.querySelector(".feels-like");
 const humidity = document.querySelector(".humidity-value");
 const wind = document.querySelector(".wind-speed-value");
 const hpa = document.querySelector(".hpa-value");
+const visibility = document.querySelector(".visibility-value");
 const sunrise = document.querySelector(".sunrise-value");
 const sunset = document.querySelector(".sunset-value");
 
@@ -86,6 +86,9 @@ async function updateWeatherInfo() {
 		wind.textContent = `${response.wind.speed} mph`;
 		humidity.textContent = `${response.main.humidity}%`;
 		hpa.textContent = response.main.pressure;
+		visibility.textContent = `${(response.visibility / 1609).toFixed(
+			2
+		)} mph`;
 		sunrise.textContent = format(
 			convertTimeToCitySearched(
 				response,
