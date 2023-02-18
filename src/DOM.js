@@ -1,5 +1,6 @@
-import weather from "./weatherIcons.json";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import format from "date-fns/format";
+import weather from "./weatherIcons.json";
 import getWeatherInfo from "./weatherData";
 
 // Search
@@ -53,10 +54,10 @@ function updateWeatherIcon(weatherIcon, weatherValue) {
 	}
 }
 
-function convertTimeToCitySearched(response) {
-	const localTime = new Date();
-	const localTimeInMilliseconds = localTime.getTime();
-	const localTimeOffsetInMilliseconds = localTime.getTimezoneOffset() * 60000;
+function convertTimeToCitySearched(response, date) {
+	// const localTime = new Date();
+	const localTimeInMilliseconds = date.getTime();
+	const localTimeOffsetInMilliseconds = date.getTimezoneOffset() * 60000;
 	const utc = localTimeInMilliseconds + localTimeOffsetInMilliseconds;
 	return utc + 1000 * response.timezone;
 }
@@ -71,7 +72,10 @@ async function updateWeatherInfo() {
 
 		console.log(response);
 
-		time.textContent = new Date(convertTimeToCitySearched(response));
+		time.textContent = format(
+			new Date(convertTimeToCitySearched(response, new Date())),
+			"MMMM do, EEEE, y, h:mm a"
+		);
 
 		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
 		weatherDescription.textContent = response.weather[0].description;
@@ -82,8 +86,20 @@ async function updateWeatherInfo() {
 		wind.textContent = `${response.wind.speed} mph`;
 		humidity.textContent = `${response.main.humidity}%`;
 		hpa.textContent = response.main.pressure;
-		sunrise.textContent = response.sys.sunrise;
-		sunset.textContent = response.sys.sunset;
+		sunrise.textContent = format(
+			convertTimeToCitySearched(
+				response,
+				new Date(response.sys.sunrise * 1000)
+			),
+			"h:mm a"
+		);
+		sunset.textContent = format(
+			convertTimeToCitySearched(
+				response,
+				new Date(response.sys.sunset * 1000)
+			),
+			"h:mm a"
+		);
 		location.textContent = `${response.name}, ${response.sys.country}`;
 	} catch {
 		console.error("Failed to resolve weather info");
@@ -94,8 +110,10 @@ function populateWeatherForecastInfo(response) {
 	const fiveDayDailyForecast = [0, 8, 16, 24, 32, 40];
 
 	for (let i = 0; i < weatherForecastDay.length; i += 1) {
-		weatherForecastDay[i].textContent =
-			response.list[fiveDayDailyForecast[i]].dt_txt;
+		weatherForecastDay[i].textContent = format(
+			new Date(response.list[fiveDayDailyForecast[i]].dt_txt),
+			"EEEE"
+		);
 	}
 
 	for (let i = 0; i < weatherForecastDescription.length; i += 1) {
