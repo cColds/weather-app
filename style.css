@@ -59,13 +59,13 @@ svg {
 	position: absolute;
 	left: 20px;
 	color: grey;
-	top: 50%;
+	top: 20px;
 	transform: translate(-50%, -50%);
 }
 
 .fa-xmark {
 	position: absolute;
-	top: 50%;
+	top: 20px;
 	transform: translate(-50%, -50%);
 	color: grey;
 	right: 5px;
