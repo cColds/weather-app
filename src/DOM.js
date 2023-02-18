@@ -70,7 +70,7 @@ async function updateWeatherInfo() {
 			"imperial",
 			"weather"
 		);
-		loadingAnimation.classList.remove("loading");
+
 		searchErrorText.style.visibility = "hidden";
 
 		console.log(response);
@@ -109,6 +109,8 @@ async function updateWeatherInfo() {
 		location.textContent = `${response.name}, ${response.sys.country}`;
 	} catch (response) {
 		searchErrorText.style.visibility = "visible";
+		loadingAnimation.classList.remove("loading");
+
 		console.error("Failed to resolve weather info");
 	}
 }
@@ -151,6 +153,7 @@ async function updateWeatherForecast() {
 		);
 		console.log(response);
 		populateWeatherForecastInfo(response);
+		loadingAnimation.classList.remove("loading");
 	} catch {
 		console.error("Failed to resolve weather forecast");
 	}
