@@ -1,0 +1,45 @@
+.more-weather-info {
+	border-top: 2px solid powderblue;
+	gap: 15px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 1rem;
+}
+
+.more-weather-info-item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-weight: bold;
+	color: #d2e0f1;
+	width: 100px;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+.more-weather-info-item .value {
+	font-size: 1.2rem;
+	text-shadow: 0px 0px 3px rgba(58, 57, 52, 1);
+	font-weight: bold;
+	color: white;
+}
+
+.wind-icon {
+	fill: #bae6fd;
+}
+
+.humidity-icon {
+	fill: #60a5fa;
+}
+.hpa-icon {
+	fill: rgb(199, 214, 241);
+}
+
+.sunrise-icon {
+	fill: #fb923c;
+}
+
+.sunset-icon {
+	fill: #f87e4d;
+}
