@@ -27,10 +27,6 @@ main {
 	gap: 15px;
 }
 
-i {
-	cursor: pointer;
-}
-
 svg {
 	width: 24px;
 }

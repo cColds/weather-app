@@ -6,8 +6,8 @@ import getWeatherInfo from "./weatherData";
 // Search
 
 const searchBar = document.querySelector(".search-bar");
-const searchButton = document.querySelector(".fa-magnifying-glass");
-const clearSearch = document.querySelector(".fa-xmark");
+const searchButton = document.querySelector(".search-bar-magnifying-glass");
+const clearSearch = document.querySelector(".search-bar-delete");
 const searchErrorText = document.querySelector(".search-error-text");
 
 // Weather
