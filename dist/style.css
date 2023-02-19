@@ -19,12 +19,6 @@ body {
 	color: white;
 }
 
-header {
-	display: flex;
-	justify-content: center;
-	padding: 15px 15px 0px 15px;
-}
-
 main {
 	display: flex;
 	align-items: center;
