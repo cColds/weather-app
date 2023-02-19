@@ -6,11 +6,11 @@
 	top: 50%;
 	/* left: 50%; */
 	transform: translate(-50%, -50%);
-	visibility: hidden;
+	display: none;
 }
 
 .loading-animation.loading {
-	visibility: visible;
+	display: block;
 }
 
 .loading-animation:before,
