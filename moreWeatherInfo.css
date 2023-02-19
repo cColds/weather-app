@@ -13,7 +13,7 @@
 	align-items: center;
 	font-weight: bold;
 	color: #d2e0f1;
-	width: 100px;
+	width: 30%;
 	flex-wrap: wrap;
 	flex-grow: 1;
 }
@@ -23,6 +23,7 @@
 	text-shadow: 0px 0px 3px rgba(58, 57, 52, 1);
 	font-weight: bold;
 	color: white;
+	text-align: center;
 }
 
 .wind-icon {
