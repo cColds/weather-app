@@ -18,13 +18,16 @@
     </head>
 
     <body>
-        <main>
+        <header>
             <div class="search-bar-container">
                 <input type="text" class="search-bar" placeholder="Search for a city"></input>
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <i class="fa-solid fa-xmark"></i>
                 <div class="search-error-text">City not found.</div>
             </div>
+        </header>
+
+        <main>
 
             <div class="weather-card">
                 <div class="loading-animation loading"></div>
@@ -115,7 +118,7 @@
                 <h3 class="weather-forecast-heading">Weather Forecast</h3>
 
                 <div class="five-day-forecast">
-                    <div class="day-forecast-card">
+                    <div class="day-forecast-card highlight">
                         <div class="day-forecast-date"></div>
                         <img src="" alt="weather icon" class="weather-forecast-icon">
                         <div class="day-forecast-weather-description"></div>

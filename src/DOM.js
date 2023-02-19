@@ -63,56 +63,37 @@ function convertTimeToCitySearched(response, date) {
 	return utc + 1000 * response.timezone;
 }
 
-async function updateWeatherInfo() {
-	try {
-		const response = await getWeatherInfo(
-			searchBar.value,
-			"imperial",
-			"weather"
-		);
+function populateWeatherInfo(response) {
+	time.textContent = format(
+		new Date(convertTimeToCitySearched(response, new Date())),
+		"MMMM do, EEEE, h:mm a"
+	);
 
-		searchErrorText.style.visibility = "hidden";
-
-		console.log(response);
-
-		time.textContent = format(
-			new Date(convertTimeToCitySearched(response, new Date())),
-			"MMMM do, EEEE, h:mm a"
-		);
-
-		updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
-		weatherDescription.textContent = response.weather[0].description;
-		temperature.textContent = `${response.main.temp.toFixed(0)}°`;
-		feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
-			0
-		)}°`;
-		wind.textContent = `${response.wind.speed} mph`;
-		humidity.textContent = `${response.main.humidity}%`;
-		hpa.textContent = response.main.pressure;
-		visibility.textContent = `${(response.visibility / 1609).toFixed(
-			2
-		)} miles`;
-		sunrise.textContent = format(
-			convertTimeToCitySearched(
-				response,
-				new Date(response.sys.sunrise * 1000)
-			),
-			"h:mm a"
-		);
-		sunset.textContent = format(
-			convertTimeToCitySearched(
-				response,
-				new Date(response.sys.sunset * 1000)
-			),
-			"h:mm a"
-		);
-		location.textContent = `${response.name}, ${response.sys.country}`;
-	} catch (response) {
-		searchErrorText.style.visibility = "visible";
-		loadingAnimation.classList.remove("loading");
-
-		console.error("Failed to resolve weather info");
-	}
+	updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
+	weatherDescription.textContent = response.weather[0].description;
+	temperature.textContent = `${response.main.temp.toFixed(0)}°`;
+	feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
+		0
+	)}°`;
+	wind.textContent = `${response.wind.speed} mph`;
+	humidity.textContent = `${response.main.humidity}%`;
+	hpa.textContent = response.main.pressure;
+	visibility.textContent = `${(response.visibility / 1609).toFixed(2)} miles`;
+	sunrise.textContent = format(
+		convertTimeToCitySearched(
+			response,
+			new Date(response.sys.sunrise * 1000)
+		),
+		"h:mm a"
+	);
+	sunset.textContent = format(
+		convertTimeToCitySearched(
+			response,
+			new Date(response.sys.sunset * 1000)
+		),
+		"h:mm a"
+	);
+	location.textContent = `${response.name}, ${response.sys.country}`;
 }
 
 function populateWeatherForecastInfo(response) {
@@ -144,6 +125,26 @@ function populateWeatherForecastInfo(response) {
 	}
 }
 
+async function updateWeatherInfo() {
+	try {
+		const response = await getWeatherInfo(
+			searchBar.value,
+			"imperial",
+			"weather"
+		);
+
+		searchErrorText.style.visibility = "hidden";
+		populateWeatherInfo(response);
+
+		console.log(response);
+	} catch (response) {
+		searchErrorText.style.visibility = "visible";
+		loadingAnimation.classList.remove("loading");
+
+		console.error("Failed to resolve weather info");
+	}
+}
+
 async function updateWeatherForecast() {
 	try {
 		const response = await getWeatherInfo(
@@ -152,7 +153,9 @@ async function updateWeatherForecast() {
 			"forecast"
 		);
 		console.log(response);
+
 		populateWeatherForecastInfo(response);
+
 		loadingAnimation.classList.remove("loading");
 		weatherForecast.style.visibility = "visible";
 	} catch {
