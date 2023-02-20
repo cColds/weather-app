@@ -40,22 +40,18 @@ const weatherForecastTemperature = document.querySelectorAll(
 );
 const weatherForecastIcon = document.querySelectorAll(".weather-forecast-icon");
 
+// Settings
+
 const settings = document.querySelector(".settings-container");
 const settingsOverlay = document.querySelector(".settings.overlay");
 const openSettings = document.querySelector(".open-settings");
 const closeSettings = document.querySelector(".close-modal.settings");
-
-openSettings.addEventListener("click", () => {
-	settings.classList.add("active");
-});
-
-settingsOverlay.addEventListener("click", () =>
-	settings.classList.remove("active")
+const measurementUnitCheckbox = document.querySelector(
+	"#measurement-unit-checkbox"
 );
-
-closeSettings.addEventListener("click", () => {
-	settings.classList.remove("active");
-});
+const clockFormatCheckbox = document.querySelector("#clock-format-checkbox");
+const measurementUnit = document.querySelector(".measurement-unit");
+const clockFormat = document.querySelector(".clock-format");
 
 function updateWeatherIcon(weatherIcon, weatherValue) {
 	if (weatherValue === "Clear") {
@@ -187,9 +183,29 @@ function searchWeatherInfo() {
 	updateWeatherForecast();
 	searchBar.value = "";
 }
-// default weather to singapore
+
 searchBar.value = "Singapore";
 searchWeatherInfo();
+
+measurementUnit.addEventListener("click", () => {
+	measurementUnitCheckbox.checked = !measurementUnitCheckbox.checked;
+});
+
+clockFormat.addEventListener("click", () => {
+	clockFormatCheckbox.checked = !clockFormatCheckbox.checked;
+});
+
+openSettings.addEventListener("click", () => {
+	settings.classList.add("active");
+});
+
+settingsOverlay.addEventListener("click", () =>
+	settings.classList.remove("active")
+);
+
+closeSettings.addEventListener("click", () => {
+	settings.classList.remove("active");
+});
 
 searchButton.addEventListener("click", searchWeatherInfo);
 
