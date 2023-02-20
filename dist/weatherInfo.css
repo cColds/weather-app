@@ -22,11 +22,32 @@
 	visibility: hidden;
 }
 
-.settings {
+.open-settings {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.75em;
+	border-radius: 5px;
+	border: 0;
+	cursor: pointer;
+	background-color: rgb(91, 187, 176);
+	width: 100px;
+	color: rgb(235, 234, 234);
+	transition: 0.3s;
+}
+
+.open-settings:hover {
+	background-color: rgb(79, 192, 179);
+}
+
+.settings-icon {
 	cursor: pointer;
 	border-radius: 5px;
-	fill: white;
-	width: 50px;
+	fill: rgb(235, 234, 234);
+}
+
+.settings-text {
+	font-weight: bold;
 }
 
 .time {

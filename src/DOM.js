@@ -28,7 +28,7 @@ const visibility = document.querySelector(".visibility-value");
 const sunrise = document.querySelector(".sunrise-value");
 const sunset = document.querySelector(".sunset-value");
 
-// Weather Forecast
+// Daily Weather Forecast
 const weatherForecast = document.querySelector(".weather-forecast");
 const weatherForecastDay = document.querySelectorAll(".day-forecast-date");
 const weatherForecastDescription = document.querySelectorAll(
@@ -39,6 +39,23 @@ const weatherForecastTemperature = document.querySelectorAll(
 	".day-forecast-temperature"
 );
 const weatherForecastIcon = document.querySelectorAll(".weather-forecast-icon");
+
+const settings = document.querySelector(".settings-container");
+const settingsOverlay = document.querySelector(".settings.overlay");
+const openSettings = document.querySelector(".open-settings");
+const closeSettings = document.querySelector(".close-modal.settings");
+
+openSettings.addEventListener("click", () => {
+	settings.classList.add("active");
+});
+
+settingsOverlay.addEventListener("click", () =>
+	settings.classList.remove("active")
+);
+
+closeSettings.addEventListener("click", () => {
+	settings.classList.remove("active");
+});
 
 function updateWeatherIcon(weatherIcon, weatherValue) {
 	if (weatherValue === "Clear") {
