@@ -31,7 +31,7 @@
 	pointer-events: none;
 	transition: all 0.3s ease;
 	transform: translate(-50%, -50%) scale(1.2);
-	width: clamp(250px, 100%, 500px);
+	width: clamp(250px, 90%, 500px);
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
 	background: rgba(91, 187, 176, 0.5);
@@ -74,11 +74,6 @@
 }
 
 /* SETTINGS TOGGLE SWITCH  */
-
-.toggle {
-	display: flex;
-	justify-content: space-between;
-}
 
 .toggle-switch {
 	display: inline-block;
@@ -126,4 +121,12 @@
 
 .toggle-label {
 	font-weight: bold;
+}
+
+.measurement-unit-container,
+.clock-format-container {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 1rem;
 }
