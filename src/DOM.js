@@ -76,14 +76,14 @@ function convertTimeToCitySearched(response, date) {
 	return utc + 1000 * response.timezone;
 }
 
-function getMeasurementUnit() {
+function getSystemOfMeasurement() {
 	return measurementUnitCheckbox.checked ? "metric" : "imperial";
 }
 
 function getClockFormat() {
 	return clockFormatCheckbox.checked
 		? "MMMM do, EEEE, H:mm"
-		: "MMMM do, EEEE, h:mm a";
+		: "MMMM do, EEEE, h:mm:s a";
 }
 function formatTime(response) {
 	return format(
@@ -155,7 +155,7 @@ async function updateWeatherInfo(locationName) {
 	try {
 		const response = await getWeatherInfo(
 			locationName,
-			getMeasurementUnit(),
+			getSystemOfMeasurement(),
 			"weather"
 		);
 
@@ -175,7 +175,7 @@ async function updateWeatherForecast(locationName) {
 	try {
 		const response = await getWeatherInfo(
 			locationName,
-			getMeasurementUnit(),
+			getSystemOfMeasurement(),
 			"forecast"
 		);
 		console.log(response);
