@@ -84,10 +84,14 @@ function getMeasurementSystem() {
 	return measurementUnitCheckbox.checked;
 }
 
+function getTemperatureSystem() {
+	return measurementUnitCheckbox.checked ? "C" : "F";
+}
+
 function getClockFormat() {
 	return clockFormatCheckbox.checked
 		? "MMMM do, EEEE, H:mm"
-		: "MMMM do, EEEE, h:mm:s a";
+		: "MMMM do, EEEE, h:mm a";
 }
 function formatTime(response) {
 	return format(
@@ -231,11 +235,13 @@ closeSettings.addEventListener("click", () => {
 	searchWeatherInfo(location.textContent);
 });
 
-searchButton.addEventListener("click", searchWeatherInfo);
+searchButton.addEventListener("click", () =>
+	searchWeatherInfo(searchBar.value)
+);
 
 searchBar.addEventListener("keyup", (e) => {
 	if (e.key === "Enter") {
-		searchWeatherInfo();
+		searchWeatherInfo(searchBar.value);
 	}
 });
 
