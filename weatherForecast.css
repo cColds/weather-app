@@ -6,6 +6,24 @@
 	visibility: hidden;
 }
 
+.change-weather-forecast-format {
+}
+
+.change-weather-forecast-format button {
+	padding: 0.5em 1em;
+	border-radius: 5px;
+	width: 100px;
+	border: 0;
+}
+
+.hourly-weather-forecast {
+}
+
+.change-weather-forecast-format .selected {
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	font-weight: bold;
+}
+
 .five-day-forecast {
 	display: flex;
 	gap: 15px;

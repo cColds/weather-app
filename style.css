@@ -30,3 +30,7 @@ main {
 svg {
 	width: 24px;
 }
+
+button {
+	cursor: pointer;
+}
