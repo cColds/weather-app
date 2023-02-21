@@ -76,11 +76,24 @@ function convertTimeToCitySearched(response, date) {
 	return utc + 1000 * response.timezone;
 }
 
-function populateWeatherInfo(response) {
-	time.textContent = format(
+function getMeasurementUnit() {
+	return measurementUnitCheckbox.checked ? "metric" : "imperial";
+}
+
+function getClockFormat() {
+	return clockFormatCheckbox.checked
+		? "MMMM do, EEEE, H:mm"
+		: "MMMM do, EEEE, h:mm a";
+}
+function formatTime(response) {
+	return format(
 		new Date(convertTimeToCitySearched(response, new Date())),
-		"MMMM do, EEEE, h:mm a"
+		getClockFormat()
 	);
+}
+
+function populateWeatherInfo(response) {
+	time.textContent = formatTime(response);
 
 	updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
 	weatherDescription.textContent = response.weather[0].description;
@@ -138,11 +151,11 @@ function populateWeatherForecastInfo(response) {
 	}
 }
 
-async function updateWeatherInfo() {
+async function updateWeatherInfo(locationName) {
 	try {
 		const response = await getWeatherInfo(
-			searchBar.value,
-			"imperial",
+			locationName,
+			getMeasurementUnit(),
 			"weather"
 		);
 
@@ -158,11 +171,11 @@ async function updateWeatherInfo() {
 	}
 }
 
-async function updateWeatherForecast() {
+async function updateWeatherForecast(locationName) {
 	try {
 		const response = await getWeatherInfo(
-			searchBar.value,
-			"imperial",
+			locationName,
+			getMeasurementUnit(),
 			"forecast"
 		);
 		console.log(response);
@@ -176,16 +189,15 @@ async function updateWeatherForecast() {
 	}
 }
 
-function searchWeatherInfo() {
+function searchWeatherInfo(locationName) {
 	loadingAnimation.classList.add("loading");
 
-	updateWeatherInfo();
-	updateWeatherForecast();
+	updateWeatherInfo(locationName);
+	updateWeatherForecast(locationName);
 	searchBar.value = "";
 }
 
-searchBar.value = "Singapore";
-searchWeatherInfo();
+searchWeatherInfo("Singapore, SG");
 
 measurementUnit.addEventListener("click", () => {
 	measurementUnitCheckbox.checked = !measurementUnitCheckbox.checked;
@@ -199,12 +211,14 @@ openSettings.addEventListener("click", () => {
 	settings.classList.add("active");
 });
 
-settingsOverlay.addEventListener("click", () =>
-	settings.classList.remove("active")
-);
+settingsOverlay.addEventListener("click", () => {
+	settings.classList.remove("active");
+	searchWeatherInfo(location.textContent);
+});
 
 closeSettings.addEventListener("click", () => {
 	settings.classList.remove("active");
+	searchWeatherInfo(location.textContent);
 });
 
 searchButton.addEventListener("click", searchWeatherInfo);
