@@ -80,6 +80,10 @@ function getSystemOfMeasurement() {
 	return measurementUnitCheckbox.checked ? "metric" : "imperial";
 }
 
+function getMeasurementSystem() {
+	return measurementUnitCheckbox.checked;
+}
+
 function getClockFormat() {
 	return clockFormatCheckbox.checked
 		? "MMMM do, EEEE, H:mm"
@@ -93,6 +97,10 @@ function formatTime(response) {
 }
 
 function populateWeatherInfo(response) {
+	const systemOfMeasurement = getMeasurementSystem();
+	const unitPerHour = systemOfMeasurement ? "km/h" : "mph";
+	const unit = systemOfMeasurement ? "km" : "mi";
+
 	time.textContent = formatTime(response);
 
 	updateWeatherIcon(mainWeatherIcon, response.weather[0].main);
@@ -101,10 +109,12 @@ function populateWeatherInfo(response) {
 	feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
 		0
 	)}°`;
-	wind.textContent = `${response.wind.speed} mph`;
+	wind.textContent = `${response.wind.speed} ${unitPerHour}`;
 	humidity.textContent = `${response.main.humidity}%`;
 	hpa.textContent = response.main.pressure;
-	visibility.textContent = `${(response.visibility / 1609).toFixed(2)} miles`;
+	visibility.textContent = `${(response.visibility / 1609).toFixed(
+		2
+	)} ${unit}`;
 	sunrise.textContent = format(
 		convertTimeToCitySearched(
 			response,
