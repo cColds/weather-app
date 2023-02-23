@@ -314,7 +314,7 @@ pages.forEach((page) => {
 		console.log(page.className);
 		document.querySelector(".page.selected").classList.remove("selected");
 		page.classList.add("selected");
-		searchWeatherInfo(location.textContent);
+		updateWeatherForecast(location.textContent);
 	});
 });
 
@@ -325,7 +325,7 @@ daily.addEventListener("click", () => {
 	hourly.classList.remove("selected");
 	daily.classList.add("selected");
 	weatherType.dataset.weatherType = "daily";
-	searchWeatherInfo(location.textContent);
+	updateWeatherForecast(location.textContent);
 });
 
 hourly.addEventListener("click", () => {
@@ -336,17 +336,17 @@ hourly.addEventListener("click", () => {
 	hourly.classList.add("selected");
 	weatherType.dataset.weatherType = "hourly";
 
-	searchWeatherInfo(location.textContent);
+	updateWeatherForecast(location.textContent);
 });
 
 leftArrow.addEventListener("click", () => {
 	changePageDirection(1);
 
-	searchWeatherInfo(location.textContent);
+	updateWeatherForecast(location.textContent);
 });
 
 rightArrow.addEventListener("click", () => {
 	changePageDirection(-1);
 
-	searchWeatherInfo(location.textContent);
+	updateWeatherForecast(location.textContent);
 });
