@@ -119,7 +119,6 @@ function getClockFormat() {
 	return clockFormatCheckbox.checked
 		? "MMMM do, EEEE, H:mm"
 		: "MMMM do, EEEE, h:mm a";
-	// can improve with just h:mm
 }
 function formatTime(response) {
 	return format(
@@ -311,7 +310,6 @@ clearSearch.addEventListener("click", () => {
 
 pages.forEach((page) => {
 	page.addEventListener("click", () => {
-		console.log(page.className);
 		document.querySelector(".page.selected").classList.remove("selected");
 		page.classList.add("selected");
 		updateWeatherForecast(location.textContent);
