@@ -11,6 +11,7 @@ const clearSearch = document.querySelector(".search-bar-delete");
 const searchErrorText = document.querySelector(".search-error-text");
 
 // Weather
+
 const loadingAnimation = document.querySelector(".loading-animation");
 const location = document.querySelector(".location");
 const time = document.querySelector(".time");
@@ -29,6 +30,7 @@ const sunrise = document.querySelector(".sunrise-value");
 const sunset = document.querySelector(".sunset-value");
 
 // Daily Weather Forecast
+
 const weatherForecast = document.querySelector(".weather-forecast");
 const weatherForecastDay = document.querySelectorAll(".day-forecast-date");
 const weatherForecastDescription = document.querySelectorAll(
@@ -52,6 +54,63 @@ const measurementUnitCheckbox = document.querySelector(
 const clockFormatCheckbox = document.querySelector("#clock-format-checkbox");
 const measurementUnit = document.querySelector(".measurement-unit");
 const clockFormat = document.querySelector(".clock-format");
+
+// Change Weather Format
+
+const daily = document.querySelector(".daily-weather-forecast");
+const hourly = document.querySelector(".hourly-weather-forecast");
+const pages = document.querySelectorAll(".page");
+const leftArrow = document.querySelector(".left");
+const rightArrow = document.querySelector(".right");
+
+function changePageDirection(direction) {
+	const currentPage = document.querySelector("[data-page].selected");
+	const pageIndex = +currentPage.dataset.page;
+	if (
+		(pageIndex === 0 && direction === 1) ||
+		(pageIndex === 2 && direction === -1)
+	)
+		return;
+
+	currentPage.classList.remove("selected");
+	const newPageToSelect = document.querySelector(
+		`[data-page='${pageIndex - direction}']`
+	);
+	newPageToSelect.classList.add("selected");
+}
+
+pages.forEach((page) => {
+	page.addEventListener("click", () => {
+		console.log(page.className);
+		document.querySelector(".page.selected").classList.remove("selected");
+		page.classList.add("selected");
+	});
+});
+
+daily.addEventListener("click", () => {
+	if (daily.className.includes("selected")) {
+		return;
+	}
+	hourly.classList.remove("selected");
+
+	daily.classList.add("selected");
+});
+
+hourly.addEventListener("click", () => {
+	if (hourly.className.includes("selected")) {
+		return;
+	}
+	daily.classList.remove("selected");
+	hourly.classList.add("selected");
+});
+
+leftArrow.addEventListener("click", () => {
+	changePageDirection(1);
+});
+
+rightArrow.addEventListener("click", () => {
+	changePageDirection(-1);
+});
 
 function updateWeatherIcon(weatherIcon, weatherValue) {
 	if (weatherValue === "Clear") {
@@ -114,7 +173,7 @@ function populateWeatherInfo(response) {
 	)} ${getTemperatureSystem()}°`;
 	feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
 		0
-	)}${getTemperatureSystem()}°`;
+	)} ${getTemperatureSystem()}°`;
 	wind.textContent = `${response.wind.speed} ${unitPerHour}`;
 	humidity.textContent = `${response.main.humidity}%`;
 	hpa.textContent = response.main.pressure;

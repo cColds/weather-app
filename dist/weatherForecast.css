@@ -14,14 +14,39 @@
 	border-radius: 5px;
 	width: 100px;
 	border: 0;
+	color: black;
+}
+
+.daily-weather-forecast {
 }
 
 .hourly-weather-forecast {
 }
 
+.change-hourly-weather-page {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none; /* Safari */
+	-khtml-user-select: none; /* Konqueror HTML */
+	-moz-user-select: none; /* Old versions of Firefox */
+	-ms-user-select: none; /* Internet Explorer/Edge */
+	user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.change-hourly-weather-page svg {
+	fill: white;
+	cursor: pointer;
+}
+.page.selected {
+	fill: black;
+}
+
 .change-weather-forecast-format .selected {
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	font-weight: bold;
+	border: 2px solid rgb(91, 187, 176);
+	background-color: transparent;
+	color: white;
 }
 
 .five-day-forecast {
