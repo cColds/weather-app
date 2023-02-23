@@ -24,6 +24,14 @@
 }
 
 .change-hourly-weather-page {
+	display: none;
+}
+
+[data-weather-type="hourly"] + .change-hourly-weather-page {
+	display: flex;
+}
+
+.change-hourly-weather-page {
 	-webkit-touch-callout: none; /* iOS Safari */
 	-webkit-user-select: none; /* Safari */
 	-khtml-user-select: none; /* Konqueror HTML */
