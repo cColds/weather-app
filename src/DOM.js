@@ -32,7 +32,7 @@ const sunset = document.querySelector(".sunset-value");
 // Daily Weather Forecast
 
 const weatherForecast = document.querySelector(".weather-forecast");
-const weatherForecastDay = document.querySelectorAll(".day-forecast-date");
+const weatherForecastCards = document.querySelectorAll(".day-forecast-date");
 const weatherForecastDescription = document.querySelectorAll(
 	".day-forecast-weather-description"
 );
@@ -62,6 +62,7 @@ const hourly = document.querySelector(".hourly-weather-forecast");
 const pages = document.querySelectorAll(".page");
 const leftArrow = document.querySelector(".left");
 const rightArrow = document.querySelector(".right");
+const weatherType = document.querySelector("[data-weather-type]");
 
 function changePageDirection(direction) {
 	const currentPage = document.querySelector("[data-page].selected");
@@ -78,39 +79,6 @@ function changePageDirection(direction) {
 	);
 	newPageToSelect.classList.add("selected");
 }
-
-pages.forEach((page) => {
-	page.addEventListener("click", () => {
-		console.log(page.className);
-		document.querySelector(".page.selected").classList.remove("selected");
-		page.classList.add("selected");
-	});
-});
-
-daily.addEventListener("click", () => {
-	if (daily.className.includes("selected")) {
-		return;
-	}
-	hourly.classList.remove("selected");
-
-	daily.classList.add("selected");
-});
-
-hourly.addEventListener("click", () => {
-	if (hourly.className.includes("selected")) {
-		return;
-	}
-	daily.classList.remove("selected");
-	hourly.classList.add("selected");
-});
-
-leftArrow.addEventListener("click", () => {
-	changePageDirection(1);
-});
-
-rightArrow.addEventListener("click", () => {
-	changePageDirection(-1);
-});
 
 function updateWeatherIcon(weatherIcon, weatherValue) {
 	if (weatherValue === "Clear") {
@@ -151,12 +119,34 @@ function getClockFormat() {
 	return clockFormatCheckbox.checked
 		? "MMMM do, EEEE, H:mm"
 		: "MMMM do, EEEE, h:mm a";
+	// can improve with just h:mm
 }
 function formatTime(response) {
 	return format(
 		new Date(convertTimeToCitySearched(response, new Date())),
 		getClockFormat()
 	);
+}
+
+function formatClockWeatherType() {
+	const isDailySelected = document
+		.querySelector(".daily-weather-forecast")
+		.className.includes("selected");
+	if (isDailySelected) {
+		return "EEEE";
+	}
+	if (clockFormatCheckbox.checked) {
+		return "H:mm";
+	}
+
+	return "h:mm a";
+}
+
+function getWeatherForecastPageByHour(page) {
+	if (page === 0) return [0, 1, 2, 3, 4, 5];
+	if (page === 1) return [6, 7, 8, 9, 10];
+
+	return [11, 12, 13, 14, 15];
 }
 
 function populateWeatherInfo(response) {
@@ -197,36 +187,34 @@ function populateWeatherInfo(response) {
 	location.textContent = `${response.name}, ${response.sys.country}`;
 }
 
-function populateWeatherForecastInfo(response) {
-	const fiveDayDailyForecast = [0, 8, 16, 24, 32, 40];
-
-	for (let i = 0; i < weatherForecastDay.length; i += 1) {
-		weatherForecastDay[i].textContent = format(
-			new Date(response.list[fiveDayDailyForecast[i]].dt_txt),
-			"EEEE"
+function populateWeatherForecastInfo(response, weatherForecastList) {
+	for (let i = 0; i < weatherForecastCards.length; i += 1) {
+		weatherForecastCards[i].textContent = format(
+			new Date(response.list[weatherForecastList[i]].dt_txt),
+			formatClockWeatherType()
 		);
 	}
 
 	for (let i = 0; i < weatherForecastDescription.length; i += 1) {
 		weatherForecastDescription[i].textContent =
-			response.list[fiveDayDailyForecast[i]].weather[0].description;
+			response.list[weatherForecastList[i]].weather[0].description;
 	}
 
 	for (let i = 0; i < weatherForecastTemperature.length; i += 1) {
 		weatherForecastTemperature[i].textContent = `${response.list[
-			fiveDayDailyForecast[i]
+			weatherForecastList[i]
 		].main.temp.toFixed(0)} ${getTemperatureSystem()}°`;
 	}
 
 	for (let i = 0; i < weatherForecastIcon.length; i += 1) {
 		weatherForecastIcon[i].textContent = updateWeatherIcon(
 			weatherForecastIcon[i],
-			response.list[fiveDayDailyForecast[i]].weather[0].main
+			response.list[weatherForecastList[i]].weather[0].main
 		);
 	}
 }
 
-async function updateWeatherInfo(locationName) {
+async function updateWeatherInfo(locationName, weatherForecastType) {
 	try {
 		const response = await getWeatherInfo(
 			locationName,
@@ -235,7 +223,7 @@ async function updateWeatherInfo(locationName) {
 		);
 
 		searchErrorText.style.visibility = "hidden";
-		populateWeatherInfo(response);
+		populateWeatherInfo(response, weatherForecastType);
 
 		console.log(response);
 	} catch (response) {
@@ -254,8 +242,19 @@ async function updateWeatherForecast(locationName) {
 			"forecast"
 		);
 		console.log(response);
+		const dailyForecastDays = [0, 8, 16, 24, 32, 40];
+		const currentPage = document.querySelector("[data-page].selected");
+		const pageIndex = +currentPage.dataset.page;
 
-		populateWeatherForecastInfo(response);
+		let weatherForecastList;
+		console.log(daily.className.includes("selected"));
+		if (daily.className.includes("selected")) {
+			weatherForecastList = dailyForecastDays;
+		} else {
+			weatherForecastList = getWeatherForecastPageByHour(pageIndex);
+		}
+
+		populateWeatherForecastInfo(response, weatherForecastList);
 
 		loadingAnimation.classList.remove("loading");
 		weatherForecast.style.visibility = "visible";
@@ -308,4 +307,46 @@ searchBar.addEventListener("keyup", (e) => {
 
 clearSearch.addEventListener("click", () => {
 	searchBar.value = "";
+});
+
+pages.forEach((page) => {
+	page.addEventListener("click", () => {
+		console.log(page.className);
+		document.querySelector(".page.selected").classList.remove("selected");
+		page.classList.add("selected");
+		searchWeatherInfo(location.textContent);
+	});
+});
+
+daily.addEventListener("click", () => {
+	if (daily.className.includes("selected")) {
+		return;
+	}
+	hourly.classList.remove("selected");
+	daily.classList.add("selected");
+	weatherType.dataset.weatherType = "daily";
+	searchWeatherInfo(location.textContent);
+});
+
+hourly.addEventListener("click", () => {
+	if (hourly.className.includes("selected")) {
+		return;
+	}
+	daily.classList.remove("selected");
+	hourly.classList.add("selected");
+	weatherType.dataset.weatherType = "hourly";
+
+	searchWeatherInfo(location.textContent);
+});
+
+leftArrow.addEventListener("click", () => {
+	changePageDirection(1);
+
+	searchWeatherInfo(location.textContent);
+});
+
+rightArrow.addEventListener("click", () => {
+	changePageDirection(-1);
+
+	searchWeatherInfo(location.textContent);
 });
