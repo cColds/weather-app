@@ -56,6 +56,11 @@
 	font-size: 1.25rem;
 }
 
+.location,
+.time {
+	text-align: center;
+}
+
 .weather-description,
 .day-forecast-weather-description {
 	text-transform: capitalize;
