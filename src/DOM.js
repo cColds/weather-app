@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import format from "date-fns/format";
 import weather from "./weatherIcons.json";
 import getWeatherInfo from "./weatherData";
@@ -231,8 +230,6 @@ async function updateWeatherInfo(locationName, weatherForecastType) {
 
 		searchErrorText.style.visibility = "hidden";
 		populateWeatherInfo(response, weatherForecastType);
-
-		console.log(response);
 	} catch (response) {
 		searchErrorText.style.visibility = "visible";
 		loadingAnimation.classList.remove("loading");
@@ -248,13 +245,12 @@ async function updateWeatherForecast(locationName) {
 			getSystemOfMeasurement(),
 			"forecast"
 		);
-		console.log(response);
 		const dailyForecastDays = [0, 8, 16, 24, 32, 40];
 		const currentPage = document.querySelector("[data-page].selected");
 		const pageIndex = +currentPage.dataset.page;
 
 		let weatherForecastList;
-		console.log(daily.className.includes("selected"));
+
 		if (daily.className.includes("selected")) {
 			weatherForecastList = dailyForecastDays;
 		} else {
