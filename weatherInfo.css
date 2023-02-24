@@ -74,5 +74,18 @@
 
 .feels-like {
 	font-size: 1.5rem;
+}
+
+.more-temperature-info {
+	display: flex;
+	gap: 15px;
+	align-items: center;
 	padding-bottom: 1rem;
+	flex-direction: column;
+}
+
+.min-max-temperature {
+	display: flex;
+	gap: 15px;
+	font-weight: 600;
 }
