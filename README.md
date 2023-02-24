@@ -32,4 +32,3 @@
 
 -   Async/await/promises
 -   How to fetch APIs and manipulate data
--
