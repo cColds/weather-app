@@ -159,10 +159,10 @@ function populateWeatherInfo(response) {
 	weatherDescription.textContent = response.weather[0].description;
 	temperature.textContent = `${response.main.temp.toFixed(
 		0
-	)} ${getTemperatureSystem()}°`;
+	)}° ${getTemperatureSystem()}`;
 	feelsLike.textContent = `feels like ${response.main.feels_like.toFixed(
 		0
-	)} ${getTemperatureSystem()}°`;
+	)}° ${getTemperatureSystem()}`;
 	wind.textContent = `${response.wind.speed} ${unitPerHour}`;
 	humidity.textContent = `${response.main.humidity}%`;
 	hpa.textContent = response.main.pressure;
@@ -202,7 +202,7 @@ function populateWeatherForecastInfo(response, weatherForecastList) {
 	for (let i = 0; i < weatherForecastTemperature.length; i += 1) {
 		weatherForecastTemperature[i].textContent = `${response.list[
 			weatherForecastList[i]
-		].main.temp.toFixed(0)} ${getTemperatureSystem()}°`;
+		].main.temp.toFixed(0)}° ${getTemperatureSystem()}`;
 	}
 
 	for (let i = 0; i < weatherForecastIcon.length; i += 1) {
