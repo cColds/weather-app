@@ -19,6 +19,8 @@ const mainWeatherIcon = document.querySelector(".weather-icon");
 const weatherDescription = document.querySelector(".weather-description");
 const temperature = document.querySelector(".temperature");
 const feelsLike = document.querySelector(".feels-like");
+const minTemperature = document.querySelector(".min-temperature-value");
+const maxTemperature = document.querySelector(".max-temperature-value");
 
 // More Weather Info
 
@@ -184,6 +186,12 @@ function populateWeatherInfo(response) {
 		"h:mm a"
 	);
 	location.textContent = `${response.name}, ${response.sys.country}`;
+	minTemperature.textContent = `${response.main.temp_min.toFixed(
+		0
+	)}° ${getTemperatureSystem()}`;
+	maxTemperature.textContent = `${response.main.temp_max.toFixed(
+		0
+	)}° ${getTemperatureSystem()} `;
 }
 
 function populateWeatherForecastInfo(response, weatherForecastList) {
